@@ -11,3 +11,4 @@
 #### - [服务端渲染与 Universal React App](https://github.com/AlanWei/blog/issues/6)
 ### 机器学习
 #### - [写给 Web 开发者的深度学习教程 - 向量化 & 矩阵](https://github.com/AlanWei/blog/issues/7)
+#### - [写给 Web 开发者的深度学习教程 - 数据标准化 & 参数初始化](https://github.com/AlanWei/blog/issues/8)
