@@ -1,7 +1,7 @@
 # 从新的 Context API 看 React 应用设计模式
 在即将发布的 React v16.3.0 中，React 引入了新的声明式的，可透传 props 的 [Context API](https://github.com/facebook/react/pull/11818)，对于新版 Context API 还不太了解朋友可以看一下笔者之前的一个[回答](https://www.zhihu.com/question/267168180/answer/319754359)。
 
-受益于这次改动，React 开发者终于拥有了一个官方提供的安全稳定的 global store，子组件跨层级获取父组件数据及后续更新都不再成为一个问题。这让我们不禁开始思考，相较于 Redux 等其他第三方的数据（状态）管理工具，使用 Context 这种 vanilla React 支持的方式去管理全局数据是不是一个更好的选择呢？
+受益于这次改动，React 开发者终于拥有了一个官方提供的安全稳定的 global store，子组件跨层级获取父组件数据及后续更新都不再成为一个问题。这让我们不禁开始思考，相较于 Redux 等其他第三方的数据（状态）管理工具，使用 Context 这种 vanilla React 支持的方式去管理全局数据是不是一个更好的选择呢？
 
 ## Context vs. Redux
 在 react + redux 已经成为开始一个 React 项目标配的今天，我们似乎已经忘记了 react 本身其实是可以使用 state 和 props 来管理数据的。甚至对于市面上大部分的应用来说，对于 redux 的不正确使用实际上增加了应用的复杂度及代码量。
@@ -311,4 +311,4 @@ const TodoList = props => (
 ## 小结
 在 React v16.3.0 正式发布后，用 Context 来做依赖注入（theme，intl，buildConfig），用 Redux 来管理数据流，渐进式地根据业务场景选择 redux-thunk，redux-saga 或 redux-observable 来处理复杂异步情况，可能会一种更好的 React 应用设计模式。
 
-选择用什么样的工具从来都不是决定一个开发团队成败的关键，根据业务场景合适选择恰当的工具，并利用工具约束开发者，并最终达到控制整体项目复杂度的目的，才是一个开发团队能够不断进步的核心动力。
+选择用什么样的工具从来都不是决定一个开发团队成败的关键，根据业务场景合适选择恰当的工具，并利用工具反过来约束开发者，最终达到控制整体项目复杂度的目的，才是一个开发团队能够不断进步的核心动力。
