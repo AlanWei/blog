@@ -308,6 +308,6 @@ const TodoList = props => (
 ```
 
 ## 小结
-在 React v16.3.0 正式发布后，用 Context 来做依赖注入（theme，intl，buildConfig），用 Redux 来管理数据流，渐进式地根据业务场景选择 redux-thunk，redux-saga 或 redux-observable 来处理复杂异步情况，可能会一种更好的 React 应用设计模式。
+在 React v16.3.0 正式发布后，用 Context 来做依赖注入（theme，intl，buildConfig），用 Redux 来管理数据流，渐进式地根据业务场景选择 redux-thunk，redux-saga 或 redux-observable 来处理复杂异步情况，可能会是一种更好的 React 应用设计模式。
 
 选择用什么样的工具从来都不是决定一个开发团队成败的关键，根据业务场景选择恰当的工具，并利用工具反过来约束开发者，最终达到控制整体项目复杂度的目的，才是促进一个开发团队不断提升的核心动力。
