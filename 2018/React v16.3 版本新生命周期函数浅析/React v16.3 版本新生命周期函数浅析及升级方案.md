@@ -15,7 +15,7 @@
 
 ## componentWillReceiveProps
 ### 更新由 props 所决定的 state 及处理特定情况下的回调
-在老版本的 React 中，如果组件自身的某个 state 跟其 props 密切相关的话，一直都没有一种很优雅的处理方式，需要在 `componentWillReceiveProps` 中去判断前后两个 props 是否相同，如果不同再将新的 props 更新到相应的 state 上去。这样做一来会破坏 state 数据的单一数据源，导致组件状态变得不可预测，另一方面也会增加组件的重绘次数。但由于类似的业务需求很多，如一个可以横向滑动的列表，当前高亮的 Tab 隶属于列表自身的状态，但很多情况下，业务需求会要求从外部跳转至列表时，根据当前的某个值，直接定位到某个 Tab。
+在老版本的 React 中，如果组件自身的某个 state 跟其 props 密切相关的话，一直都没有一种很优雅的处理方式，需要在 `componentWillReceiveProps` 中去判断前后两个 props 是否相同，如果不同再将新的 props 更新到相应的 state 上去。这样做一来会破坏 state 数据的单一数据源，导致组件状态变得不可预测，另一方面也会增加组件的重绘次数。类似的业务需求也有很多，如一个可以横向滑动的列表，当前高亮的 Tab 隶属于列表自身的状态，但很多情况下，业务需求会要求从外部跳转至列表时，根据传入的某个值，直接定位到某个 Tab。
 
 在新版本中，React 官方提供了一个更为简洁的生命周期函数：
 
@@ -80,10 +80,10 @@ componentDidUpdate(prevProps, prevState) {
 }
 ```
 
-通常来讲，在 `componentWillReceiveProps` 中，我们一般会做以下两件事，一是根据 props 的更新来更新 state，二是触发一些回调，如动画或页面跳转等。在老版本的 React 中，这两件事我们都需要在 `componentWillReceiveProps` 中去做。而在新版本中，官方将更新 state 与触发回调重新分配到了 `getDerivedStateFromProps` 与 `componentDidUpdate` 中，使得组件整体的更新逻辑更为清晰。而且在 `getDerivedStateFromProps` 中还禁止了组件去访问 prevProps，强制让开发者去比较 nextProps 与 prevState 中的值，以确保当开发者用到 `getDerivedStateFromProps` 这个生命周期函数时，就是在根据当前的 props 来更新组件的 state，而不是去做其他一些让组件状态变得更加不可预测的事情。
+通常来讲，在 `componentWillReceiveProps` 中，我们一般会做以下两件事，一是根据 props 来更新 state，二是触发一些回调，如动画或页面跳转等。在老版本的 React 中，这两件事我们都需要在 `componentWillReceiveProps` 中去做。而在新版本中，官方将更新 state 与触发回调重新分配到了 `getDerivedStateFromProps` 与 `componentDidUpdate` 中，使得组件整体的更新逻辑更为清晰。而且在 `getDerivedStateFromProps` 中还禁止了组件去访问 prevProps，强制让开发者去比较 nextProps 与 prevState 中的值，以确保当开发者用到 `getDerivedStateFromProps` 这个生命周期函数时，就是在根据当前的 props 来更新组件的 state，而不是去做其他一些让组件状态变得更加不可预测的事情。
 
 ### 升级方案
-将现有 `componentWillReceiveProps` 中的代码根据更新 state 或回调，分别在 getDerivedStateFromProps 及 componentDidUpdate 中进行相应的重写即可，注意新老生命周期函数中 `prevProps`，`this.props`，`nextProps`，`prevState`，`this.state` 的不同。
+将现有 `componentWillReceiveProps` 中的代码根据更新 state 或回调，分别在 `getDerivedStateFromProps` 及 `componentDidUpdate` 中进行相应的重写即可，注意新老生命周期函数中 `prevProps`，`this.props`，`nextProps`，`prevState`，`this.state` 的不同。
 
 ## componentWillUpdate
 ### 处理因为 props 改变而带来的副作用
@@ -153,8 +153,8 @@ class ScrollingList extends React.Component {
 #### After
 ![](./new-lifecycle.jpg)
 
-在第一张图中红框圈起来的三个生命周期函数就是在新版本中即将被移除的。通过上述的两张图，我们可以清楚地看到将要被移除的三个生命周期函数都是在 render 之前会被调用到的。而根据原来的设计，在这三个生命周期函数中都是可以去做一些诸如发送请求，setState 等包含副作用的事情的。在老版本的 React 中，这样也许只会带来一些性能上的损耗，但在 React 开启异步渲染模式之后，是无法接受这样的副作用产生的。举一个 Git 的例子就是在开发者 commit 了 10 个文件更新后，又对当前或其他文件做了另外的更新，但在 push 的时候却仍然只 push 了刚才 commit 的 10 个文件更新。这样显然会导致提交记录与实际更新不符，如果想要避免这些问题，就需要保证每一次的文件更新都要经过 commit 阶段，再被提交到远端，而这也就是在 React 开启异步渲染之后所要做到的。
+在第一张图中红框圈起来的三个生命周期函数就是在新版本中即将被移除的。通过上述的两张图，我们可以清楚地看到将要被移除的三个生命周期函数都是在 render 之前会被调用到的。而根据原来的设计，在这三个生命周期函数中都是可以去做一些诸如发送请求，setState 等包含副作用的事情的。在老版本的 React 中，这样做也许只会带来一些性能上的损耗，但在 React 开启异步渲染模式之后，是无法接受这样的副作用产生的。举一个 Git 的例子就是在开发者 commit 了 10 个文件更新后，又对当前或其他文件做了另外的更新，但在 push 的时候却仍然只 push 了刚才 commit 的 10 个文件更新。这就会导致提交记录与实际更新不符，如果想要避免这些问题，就需要保证每一次的文件更新都要经过 commit 阶段，再被提交到远端，而这也就是在 React 开启异步渲染之后所要做到的。
 
 另一方面，为了验证个人的理解及测试新版本的稳定性，笔者已经将个人负责的几个项目全部都升级到了 React 16.3 并根据上述提到的升级方案替换了所有即将被移除的生命周期函数。目前所有项目在生产环境中都运行良好，没有收到任何不良的用户反馈。
 
-当然，以上的这些生命周期函数的改动，一直要到 React 17.0 中才会实装，这给广大的 React 开发者们预留了充足的时间去适应这次改动。但如果你是 React 开源项目（尤其是组件库）的维护者，不妨花点时间了解一下这次生命周期函数的改动，这不仅仅可以帮助你将开源项目更好地升级到最新版本，更重要的是可以帮助你提前理解即将到来的异步渲染模式。笔者相信，在 React 开启异步渲染之后，许多常用组件的性能将很有可能迎来一次整体的提升，配合异步渲染，许多现在的复杂组件可以在代码层面被处理得更加优雅，并最终为用户带来更加直观的使用体验。
+当然，以上的这些生命周期函数的改动，一直要到 React 17.0 中才会实装，这给广大的 React 开发者们预留了充足的时间去适应这次改动。但如果你是 React 开源项目（尤其是组件库）的维护者，不妨花点时间去了解一下这次生命周期函数的改动，这不仅仅可以帮助你将开源项目更好地升级到最新版本，更重要的是可以帮助你提前理解即将到来的异步渲染模式。笔者相信，在 React 开启异步渲染之后，许多常用组件的性能将很有可能迎来一次整体的提升，配合异步渲染，许多现在的复杂组件都可以在代码层面被处理得更加优雅，并最终为用户带来更加直观的使用体验。
