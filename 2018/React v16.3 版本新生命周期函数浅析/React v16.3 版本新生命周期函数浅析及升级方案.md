@@ -62,7 +62,7 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-```
+```javascript
 // after
 static getDerivedStateFromProps(nextProps, prevState) {
   if (nextProps.isLogin !== prevState.isLogin) {
