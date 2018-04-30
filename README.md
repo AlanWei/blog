@@ -13,5 +13,5 @@
 ### 机器学习
 #### - [写给 Web 开发者的深度学习教程 - 向量化 & 矩阵](https://github.com/AlanWei/blog/issues/7)
 #### - [写给 Web 开发者的深度学习教程 - 数据标准化 & 参数初始化](https://github.com/AlanWei/blog/issues/8)
-### 其他
+### React 相关
 #### - [React v16.3 版本新生命周期函数浅析及升级方案](https://github.com/AlanWei/blog/issues/10)
