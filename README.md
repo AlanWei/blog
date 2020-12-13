@@ -1,5 +1,12 @@
 # blog
 ## 目录
+
+### 行业观察
+#### - [谈谈电商赛道的需求侧改革](https://github.com/AlanWei/blog/issues/13)
+#### - [Snowflake 与数据云（Data Cloud）](https://github.com/AlanWei/blog/issues/11)
+
+### 工程团队管理
+#### - [如何打造一支业务前台的数据工程团队](https://github.com/AlanWei/blog/issues/12)
 ### 组件库
 #### - [重新设计 React 组件库](https://github.com/AlanWei/blog/issues/1)
 #### - [组件库设计实战 - 组件分类、文档管理与打包发布](https://github.com/AlanWei/blog/issues/2)
@@ -15,7 +22,3 @@
 #### - [写给 Web 开发者的深度学习教程 - 数据标准化 & 参数初始化](https://github.com/AlanWei/blog/issues/8)
 ### React 相关
 #### - [React v16.3 版本新生命周期函数浅析及升级方案](https://github.com/AlanWei/blog/issues/10)
-### 行业观察
-#### - [Snowflake 与数据云（Data Cloud）](https://github.com/AlanWei/blog/issues/11)
-### 工程团队管理
-#### - [如何打造一支业务前台的数据工程团队](https://github.com/AlanWei/blog/issues/12)
