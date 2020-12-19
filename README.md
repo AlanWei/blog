@@ -5,6 +5,8 @@
 #### - [谈谈电商赛道的需求侧改革](https://github.com/AlanWei/blog/issues/13)
 #### - [Snowflake 与数据云（Data Cloud）](https://github.com/AlanWei/blog/issues/11)
 
+### 投资
+#### - [2020 个人投资笔记（上）](https://github.com/AlanWei/blog/issues/14)
 ### 工程团队管理
 #### - [如何打造一支业务前台的数据工程团队](https://github.com/AlanWei/blog/issues/12)
 ### 组件库
